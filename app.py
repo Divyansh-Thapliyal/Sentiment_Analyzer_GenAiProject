@@ -17,13 +17,34 @@ classifier = pipeline(
 
 # Now lets create ui using gradio. So lets create a function.
 
-def sentiment_analysis(text):
-    result = classifier(text)
-    return result
+# def sentiment_analysis(text):
+#     result = classifier(text)
+#     return result
 
+
+
+# demo = gr.Interface(
+#     fn=sentiment_analysis2,
+#     inputs=gr.Textbox(lines=5, label="Input", placeholder="Enter text here..."),
+#     outputs=gr.Textbox(lines=5, label="Result",placeholder="Sentiment result will appear here..."),
+#     title= "Sentiment Analysis Project",
+#     description="This is a simple sentiment analysis project using Hugging Face Transformers and Gradio.",
+#     theme="default"
+
+# )
+
+# Launch the Gradio app
+# demo.launch()
+
+
+# Now lets change the json format of output to a more readable format.Only show the label.
+
+def sentiment_analysis2(text):
+    result = classifier(text)
+    return result[0]['label']
 
 demo = gr.Interface(
-    fn=sentiment_analysis,
+    fn=sentiment_analysis2,
     inputs=gr.Textbox(lines=5, label="Input", placeholder="Enter text here..."),
     outputs=gr.Textbox(lines=5, label="Result",placeholder="Sentiment result will appear here..."),
     title= "Sentiment Analysis Project",
@@ -32,5 +53,5 @@ demo = gr.Interface(
 
 )
 
-# Launch the Gradio app
 demo.launch()
+
